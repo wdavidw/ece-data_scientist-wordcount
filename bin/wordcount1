@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cwd="$( cd "$( dirname "${BASH_SOURCE}" )" && pwd )"
+cd $cwd/../
+
+
+mvn jar:jar
+scp -P 2222 target/ece-wordcount-0.0.1.jar root@127.0.0.1:/root
+ssh root@127.0.0.1 -p 2222 hadoop jar ./ece-wordcount-0.0.1.jar fr.ece.wordcount1.WordCount ece/www.ece.fr ece-out
